@@ -1,0 +1,174 @@
+.phone-block__code {
+  margin-right: 0.5rem;
+}
+
+.select-with-img {
+  display: none;
+}
+
+.lang-select {
+  position: relative;
+}
+
+#a {
+  padding-left: 0;
+  img {
+    width: 0.75rem;
+  }
+  li {
+    padding: 0.313rem 2.313rem 0.313rem 1.063rem;
+    list-style: none;
+    cursor: pointer;
+  }
+  li:hover {
+    background-color: #f4f3f3;
+  }
+  li img {
+    margin: 0.313rem 0;
+  }
+  li span,
+  .btn-select li span {
+    margin-left: 30px;
+  }
+}
+
+#a img,
+.btn-select img {
+  width: 1.625rem;
+}
+
+.b {
+  position: absolute;
+  display: none;
+  width: 100%;
+  top: 2.313rem;
+  background-color: #fcfcfc;
+  border: 2px solid #f2f2f2;
+  border-radius: 2px;
+  border-top: none;
+  z-index: 2;
+}
+
+.open {
+  display: show !important;
+}
+
+.btn-select {
+  padding-right: 2.3rem;
+  height: 2.5rem;
+  background-color: #fcfcfc;
+  border: 2px solid #f2f2f2;
+  border-radius: 2px;
+}
+.btn-select li {
+  list-style: none;
+  float: left;
+  padding-left: 1rem;
+  ::after {
+    position: absolute;
+    content: url(/img/summary.svg);
+    right: 0.75rem;
+  }
+}
+
+.custom-select {
+  margin-bottom: 1.563rem;
+  position: relative;
+  border-radius: 2px;
+  box-shadow: 0 0 0 2px #f2f2f2;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  letter-spacing: 0.28px;
+  &:focus {
+    border-left: 2px solid #2a74db;
+  }
+}
+
+.custom-select select {
+  display: none;
+}
+
+.select-selected {
+  background-color: #fcfcfc;
+  border-bottom: none;
+}
+
+.select-selected:after {
+  position: absolute;
+  content: url(/img/summary.svg);
+  right: 3%;
+}
+
+.select-items div,
+.select-selected {
+  padding: 0 0.8125em;
+  line-height: 2.5rem;
+  cursor: pointer;
+  user-select: none;
+  height: 2.5rem;
+}
+
+.select-items {
+  width: 100%;
+  position: absolute;
+  background-color: #fcfcfc;
+  top: 100%;
+  left: -2px;
+  right: 0;
+  z-index: 99;
+  border: 2px solid #f2f2f2;
+  border-radius: 2px;
+  border-top: none;
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: #f4f3f3;
+}
+
+.result-block, .wrap-table-admin {
+  ::-webkit-scrollbar {
+    width: 0.375rem;
+    height: 0.375rem;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f5f7fa;
+    border-radius: 50px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #e0e6f0;
+    border-radius: 50px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+.calendar-icon {
+  position: relative;
+  &::before {
+    color: transparent;
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: url(/img/date-calendar.svg);
+    width: 1rem;
+    position: absolute;
+    top: 0.25rem;
+    left: 0.875rem;
+    color: #999;
+  }
+}

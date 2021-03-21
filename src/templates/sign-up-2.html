@@ -1,0 +1,37 @@
+{% set question = 'Already have an account?' %}
+{% set offer = 'Log In' %}
+{% set title = 'Sign up 2' %}
+{% extends 'base.html' %}
+{% block content %} 
+<div class="content">
+  <form action="#" class="form sm-form">
+    <div class="sm-form__content">
+      <div class="sm-form__title sm-form__title_dark">Complete your account</div>
+      <input type="password" class="input-base" placeholder="Create a password" />
+      <input type="password" class="input-base" placeholder="Confirm password" />
+      <div class="confirm">
+        <li>
+          <label class="confirm__lable">
+            I agree to the myFixer.com <a href="#">Terms of Service</a>
+            <input type="checkbox" name="terms" checked />
+            <span class="checkmark"></span>
+          </label>
+        </li>
+        <li>
+          <label class="confirm__lable">
+            I agree to the myFixer.com <a href="#">Privacy Policy</a> <input type="checkbox" name="policy" />
+            <span class="checkmark"></span>
+          </label>
+        </li>
+      </div>
+
+        <div class="g-recaptcha" data-sitekey="6Lds_W4aAAAAAMqoq26rXADQ0jlhnJDXkcKSx5ZE" l></div>
+
+
+      <button class="btn btn_todown" size="compact ">Done!</button>
+    </div>
+  </form>
+</div>
+
+<script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
+{% endblock %}

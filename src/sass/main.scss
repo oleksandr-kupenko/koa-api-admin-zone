@@ -1,0 +1,126 @@
+@import 'nullstyle';
+@import 'header';
+@import 'custom-elements';
+@import 'people-block';
+@import 'admin-body';
+@import 'admin-sidebar';
+@import 'sign-body';
+
+@import url('http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300,100italic,100');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+[type='checkbox'] {
+  vertical-align: middle;
+}
+
+body {
+  background: #f9fafc;
+  font-family: Roboto;
+  color: #000000;
+  letter-spacing: -0.05px;
+}
+
+.content {
+  display: flex;
+  min-height: 100%;
+}
+
+.form {
+  background: #ffffff;
+  box-shadow: 0px 5px 40px rgba(0, 45, 113, 0.06);
+  border-radius: 10px;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+.select {
+  font-family: Roboto;
+}
+
+.input-base,
+.date-base,
+.select-base {
+  width: 100%;
+  height: calc(2.5rem - 2px);
+  margin-bottom: 1.5625em;
+  background-color: #fcfcfc;
+  box-shadow: 0 0 0 2px #f2f2f2;
+  border-radius: 2px;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1em;
+  text-align: left;
+  color: #222428;
+  &:focus {
+    outline: none;
+    border-left: 2px solid #2a74db;
+  }
+}
+
+.input-base {
+  padding: 0.4875em 0.8125em;
+  ::placeholder {
+    color: rgba(135, 144, 167, 0.57);
+  }
+}
+
+.select-base {
+  padding: 7px 14px;
+}
+
+.date-base {
+  padding: 11px 39px 13px;
+}
+
+.sm-form__content .input-base:last-of-type {
+  margin-bottom: 0;
+}
+
+.input-base_sm {
+  width: 190px;
+}
+
+.btn {
+  width: 188px;
+  height: 43px;
+  margin-left: auto;
+  border: none;
+  background: #0ad69c;
+  border-radius: 2px;
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.4px;
+  color: #ffffff;
+  cursor: pointer;
+  &:hover {
+    background: #0aa87b;
+  }
+}
+
+.btn_lg {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.btn_todown {
+  margin-top: 40px;
+}
+
+.page-list {
+  font-size: 20px;
+  margin: 8% auto;
+  line-height: 30px;
+  a:hover {
+    background-color: rgb(161, 161, 243);
+  }
+}

@@ -1,0 +1,19 @@
+{% set question = 'Do not have an account?' %}
+{% set offer = 'Sign up' %}
+{% set title = 'Sign in' %}
+{% extends 'base.html' %}
+{% block content %}  
+
+<div class="content">
+  <form action="#" class="form sm-form">
+    <div class="sm-form__content">
+      <div class="sm-form__title">Sign in</div>
+      <input type="text" class="input-base" placeholder="Login" />
+      <input type="password" class="input-base" placeholder="Password" />
+      <div class="sm-form__pass-help"><a href="/resset-pass.html">Forgot password?</a></div>         
+      <button class="btn">Sign in</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

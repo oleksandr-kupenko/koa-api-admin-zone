@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/lightpick@latest/css/lightpick.css">
+    <script async src="https://maps.googleapis.com/maps/api/js?key={{globals.googleKey}}"> defer</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <title>{{ title }}</title>
+  </head>
+
+<body>
+  <div class="wrapper grid-2col">
+
+    <header class="header admin-header">
+      <div class="header-row">
+        <div class="breadcrumbs">
+          <a href="/" class="breadcrums-element">Home</a>
+          <a href="# class=" breadcrums-element">Manage users</a>
+        </div>
+        <div class="header__profile">
+          <div class="header__avatar">
+            <img src="/img/cards-photo/header-face.png" alt="avatar">
+          </div>
+          <details class="profile-detalis">
+            <summary class="profile-detalis__summary">Sarah Freeman</summary>
+            <p>Some info in future.</p>
+          </details>
+        </div>
+      </div>
+    </header>
+    <aside class="sidebar">
+      <div class="wrapper-column">
+        <div class="sidebar-logo"><a href="/"></a><img src="/img/logo-light.svg" alt="myFixer logo"></a></div>
+        <nav class="sidebar-menu">
+          <div class="sidebar-menu__item sidebar-menu__item_active"><a href="#"><img
+                src="/img/sidebar/people.svg" alt="group people"></a></div>
+        </nav>
+      </div>
+    </aside>
+    <main class="main main-lg">
+      <div class="content">
+        <section class="form lg-form">
+          <div class="admin-block">
+            <div class="search-table">
+              <span class="search-table__ico"><img src="/img/search-icon.svg" alt="search-icon"></span>
+              <input type="text" class="search-table__input" placeholder="Type here to search...">
+            </div>
+            <div class="wrap-table-admin">
+          
+
+              <div class="thegrid">
+                <!-- [HEAD] -->
+                <div class="thegrid__head">FIRST NAME</div>
+                <div class="thegrid__head">LAST NAME</div>
+                <div class="thegrid__head">COUNTRY</div>
+                <div class="thegrid__head">STATUS</div>
+                <div class="thegrid__head">LEVEL</div>
+                <div class="thegrid__head">E-MAIL</div>
+                <div class="thegrid__head thegrid__close"></div>
+                <!-- [ROWS] -->
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Australia</div>
+                <div class="thegrid__cell">Requested</div>
+                <div class="thegrid__cell">
+                  <select name="level" class="thegrid-select">
+                    <option value="">Gold</option>
+                    <option value="">Silver</option>
+                    <option value="">Bronze</option>
+                  </select></div>
+                <div class="thegrid__cell">rfrome@gmail.com</div>
+                <div class="thegrid__cell thegrid__close"><p>&#10006;</p></div>
+
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Australia</div>
+                <div class="thegrid__cell">Requested</div>
+                <div class="thegrid__cell"><select name="level" class="thegrid-select">
+                    <option value="">Gold</option>
+                    <option value="">Silver</option>
+                    <option value="">Bronze</option>
+                  </select></div>
+                <div class="thegrid__cell">rfrome@gmail.com</div>
+                 <div class="thegrid__cell thegrid__close"><p>&#10006;</p></div>
+
+
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Australia</div>
+                <div class="thegrid__cell">Requested</div>
+                <div class="thegrid__cell"><select name="level" class="thegrid-select">
+                    <option value="">Gold</option>
+                    <option value="">Silver</option>
+                    <option value="">Bronze</option>
+                  </select></div>
+                <div class="thegrid__cell">rfrome@gmail.com</div>
+                 <div class="thegrid__cell thegrid__close"><p>&#10006;</p></div>
+
+
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Australia</div>
+                <div class="thegrid__cell">Requested</div>
+                <div class="thegrid__cell"><select name="level" class="thegrid-select">
+                    <option value="">Gold</option>
+                    <option value="">Silver</option>
+                    <option value="">Bronze</option>
+                  </select></div>
+                <div class="thegrid__cell">rfrome@gmail.com</div>
+                 <div class="thegrid__cell thegrid__close"><p>&#10006;</p></div>
+
+
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Australia</div>
+                <div class="thegrid__cell">Requested</div>
+                <div class="thegrid__cell"><select name="level" class="thegrid-select">
+                    <option value="">Gold</option>
+                    <option value="">Silver</option>
+                    <option value="">Bronze</option>
+                  </select></div>
+                <div class="thegrid__cell">rfrome@gmail.com</div>
+                 <div class="thegrid__cell thegrid__close"><p>&#10006;</p></div>
+
+
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Richard</div>
+                <div class="thegrid__cell">Australia</div>
+                <div class="thegrid__cell">Requested</div>
+                <div class="thegrid__cell"><select name="level" class="thegrid-select">
+                    <option value="">Gold</option>
+                    <option value="">Silver</option>
+                    <option value="">Bronze</option>
+                  </select></div>
+                <div class="thegrid__cell">rfrome@gmail.com</div>
+                 <div class="thegrid__cell thegrid__close"><p>&#10006;</p></div>
+
+              </div>
+            </div>
+
+          </div>
+      </div>
+      </section>
+  </div>
+  </main>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js" defer></script>
+</body>
+
+</html>

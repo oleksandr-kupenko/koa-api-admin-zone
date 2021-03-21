@@ -1,0 +1,189 @@
+.result-block {
+  width: 100%;
+  padding: 0.438rem 1.5rem 0;
+  @media (max-width: 720px) {
+    padding: 1.5rem 0;
+  }
+
+}
+
+.result-block__head {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.map-block {
+  padding-right: 0;
+}
+
+.people-bloc_icons {
+  display: flex;
+}
+
+.signal {
+  padding-right: 23px;
+}
+
+.sort {
+  display: flex;
+  margin-top: -3px;
+  label {
+    margin-right: 25px;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.05px;
+  }
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background-color: #fff;
+  border: 1px solid #f0f1f3;
+  border-radius: 50%;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #ffffff;
+  box-shadow: 0px 1px 7px rgba(204, 202, 212, 0.58);
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  top: 4.6px;
+  left: 4.6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0ad69c;
+}
+
+.people-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-height: 55vh;
+  min-height: 420px;
+  padding-left: 1rem;
+  margin-top: 30px;
+  overflow-y: auto;
+}
+
+.card-one {
+  flex-basis: 46%;
+  min-width: 330px;
+  min-height: 128px;
+  display: flex;
+  padding: 18px;
+  margin-bottom: 18px;
+  margin-right: 18px;
+  background: #ffffff;
+  outline: 1px solid rgba(237, 237, 237, 0.2);
+  border-radius: 4px;
+  box-shadow: 0px 0px 30px rgba(153, 163, 174, 0.06);
+}
+
+.card-one__photo {
+  flex-basis: 27.5%;
+  img {
+    width: 100%;
+    border-radius: 50%;
+  }
+}
+
+.card-one__text {
+  padding-left: 3%;
+  h3 {
+   font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.75rem;
+    letter-spacing: -0.05px;
+    color: #01134e;
+  }
+  p {
+    font-weight: 300;
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+    color: #000000;
+  }
+  .card-one__line-name {
+    font-weight: normal;
+    color: #01134e;
+  }
+  @media(min-width: 1400px) {
+    h3 {
+      font-size: 1.1vw;
+      line-height: 1.925vw;
+    }
+    p {
+      font-size: 0.825vw;
+      line-height: 1.125rem;
+    }
+  }
+  @media(min-width: 1700px) {
+    h3 {
+      line-height: 2.5em;
+    }
+    p {
+      line-height: 1.8em;
+    }
+  }
+}
+
+.card-one__location {
+  display: block;
+  position: relative;
+  padding-left: 10px;
+  &:before {
+    position: absolute;
+    content: url(/img/marker-map.svg);
+    left: -1px;
+    top: 1px;
+    transform: scale(0.7);
+  }
+}
+
+.card-one__stack {
+  a {
+    font-weight: normal;
+    color: #2a74db;
+    padding-left: 6px;
+  }
+}

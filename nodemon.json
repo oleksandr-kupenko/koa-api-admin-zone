@@ -1,0 +1,7 @@
+{
+    "events": {
+      "start": "npm run compileSass"
+    },
+    "watch": ["src/**/*"],
+    "ext": "js,json,html,scss"
+  }

@@ -1,0 +1,42 @@
+{% set question = 'Already have an account?' %}
+{% set offer = 'Log In' %}
+{% set title = 'Sign up 4' %}
+{% extends 'base.html' %}
+{% block content %} 
+<div class="content">
+  <div action="#" class="form sm-form">
+    <div class="sm-form__content">
+      <div class="sm-form__title sm-form__title_dark">Complete your account</div>
+      <input type="password" class="input-base m-0" placeholder="Create a password" />
+      <div class="pass-indicator">
+        <span class="pass-indicator__item pass-indicator__green"></span>
+        <span class="pass-indicator__item pass-indicator__green"></span>
+        <span class="pass-indicator__item pass-indicator__green"></span>
+      </div>
+      <input type="password" class="input-base" placeholder="Confirm password" />
+      <div class="confirm">
+        <li>
+          <label class="confirm__lable">
+            I agree to the myFixer.com <a href="#">Terms of Service</a>
+            <input type="checkbox" name="terms" checked />
+            <span class="checkmark"></span>
+          </label>
+        </li>
+        <li>
+          <label class="confirm__lable">
+            I agree to the myFixer.com <a href="#">Privacy Policy</a> <input type="checkbox" name="policy" />
+            <span class="checkmark"></span>
+          </label>
+        </li>
+      </div>
+
+        <div class="g-recaptcha" data-sitekey="6Lds_W4aAAAAAMqoq26rXADQ0jlhnJDXkcKSx5ZE" l></div>
+
+
+      <button class="btn btn_todown" size="compact ">Done!</button>
+    </div>
+  </div>
+</main>
+
+<script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{
+  "name": "server-koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "eslint:init": "eslint --init",
+    "lint": "eslint ./src/**/*.js",
+    "lint:fix": "eslint ./src/**/*.js --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compileSass": "node-sass -o src/public/css src/sass/main.scss",
+    "start": "nodemon ./src/app.js --config nodemon.json"
+  },
+  "author": "Kupenko-Alexandr",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "fast-glob": "^3.2.5",
+    "koa": "^2.13.1",
+    "koa-router": "^10.0.0",
+    "koa-sassy": "^1.0.5",
+    "koa-static": "^5.0.0",
+    "koa-views": "^7.0.1",
+    "node-cache": "^5.1.2",
+    "node-sass": "^5.0.0",
+    "nunjucks": "^3.2.3"
+  }
+}

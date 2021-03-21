@@ -1,0 +1,17 @@
+{% set question = 'Already have an account?' %} {% set offer = 'Log In' %} {% set title = 'Sign up' %} {% extends
+'base.html' %} {% block content %}
+
+<div class="content">
+  <form action="#" class="form sm-form">
+    <div class="sm-form__content">
+      <div class="sm-form__title">Sign up</div>
+      <input type="text" class="input-base input-base_sm" placeholder="First name" />
+      <input type="text" class="input-base input-base_sm" placeholder="Last name" />
+      <input type="text" class="input-base" placeholder="Username" />
+      <input type="text" class="input-base" placeholder="Email" />
+      <button class="btn btn_todown">Get started</button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

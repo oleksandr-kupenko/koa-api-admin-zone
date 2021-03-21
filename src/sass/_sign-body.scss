@@ -1,0 +1,227 @@
+.circle {
+  position: absolute;
+  width: 907px;
+  height: 907px;
+  padding: 78px;
+  background-color: rgba(254, 254, 254, 0.45);
+  box-shadow: 0px 0px 42px rgba(231, 231, 231, 0.13);
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  margin-top: -78px - 36px;
+  z-index: 1;
+}
+
+@mixin circle($col, $bs, $pd) {
+  width: 100%;
+  height: 100%;
+  padding: $pd;
+  background-color: $col;
+  box-shadow: 0px 0px 42px $bs;
+  border-radius: 50%;
+  left: 0;
+  right: 0;
+  position: relative;
+}
+
+@each $num, $col, $bs, $pd in (3, rgba(251, 248, 248, 0.45), rgba(231, 231, 231, 0.36), 70px),
+  (2, rgba(254, 254, 254, 0.54), rgba(231, 231, 231, 0.11), 75px),
+  (1, rgba(255, 255, 255, 0.54), rgba(231, 231, 231, 0.43), 0)
+{
+  .circle__#{$num} {
+    @include circle($col, $bs, $pd);
+  }
+}
+
+.circle__img {
+  width: 150px;
+  margin: 0 auto;
+  padding-top: 57px;
+}
+
+.circle__text {
+  position: absolute;
+  text-align: center;
+  bottom: 247px;
+  font-family: 'Exo 2';
+  font-style: normal;
+  z-index: 2;
+}
+
+.circle__title {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 60px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  color: #2a74db;
+}
+
+.circle__descr {
+  font-style: normal;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  letter-spacing: 0.4px;
+  color: #000000;
+}
+
+.sm-form {
+  margin: auto;
+  margin-top: 8%;
+  width: 632px;
+  padding: 72px 116px 80px;
+}
+
+.sm-form__title {
+  width: 100%;
+  font-family: 'Exo 2';
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 34px;
+  text-align: left;
+  padding-bottom: 42px;
+  color: #002396;
+}
+
+.sm-form__title_dark {
+  color: rgba(1, 19, 78, 1);
+}
+
+.sm-form__content {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.sm-form__pass-help {
+  width: 100%;
+  padding: 14px 0 15px;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  a {
+    color: #222428;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+    color: #002396;
+  }
+}
+
+.confirm {
+  padding: 37px 0 23px;
+  li {
+    list-style-type: none;
+    padding-bottom: 23px;
+  }
+  li:last-child {
+    padding-bottom: 0;
+  }
+  ul {
+    margin-left: 0;
+    padding-left: 0;
+  }
+}
+
+.confirm__lable {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16px;
+  letter-spacing: 0.28px;
+  a {
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    border: 2px solid #f2f2f2;
+    border-radius: 2px;
+  }
+
+  input:checked ~ .checkmark {
+    background-color: rgba(245, 247, 250, 0.5);
+  }
+  .checkmark:after {
+    content: '';
+    position: absolute;
+    display: none;
+  }
+  input:checked ~ .checkmark:after {
+    display: block;
+  }
+  .checkmark:after {
+    left: 7px;
+    top: 1px;
+    width: 5px;
+    height: 12px;
+    border: solid #0ad69c;
+    border-width: 0px 3px 3px 0px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+
+.g-recaptcha {
+  margin-bottom: -25px;
+  transform: scale(0.692);
+  transform-origin: 0;
+  -webkit-transform: scale(0.692);
+  transform: scale(0.692);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
+.pass-indicator {
+  height: 6px;
+  display: flex;
+  width: 100%;
+  justify-content: inherit;
+  margin: 7px 0 22px;
+  & span {
+    flex-grow: 1;
+    max-width: 32%;
+    border-radius: 2px;
+    background: #ebeff3;
+  }
+  & .pass-indicator__red {
+    background: #ff6359;
+  }
+  & .pass-indicator__orange {
+    background: #ffb966;
+  }
+  & .pass-indicator__green {
+    background: #38ecac;
+  }
+}
