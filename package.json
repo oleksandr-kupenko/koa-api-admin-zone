@@ -9,7 +9,8 @@
     "lint:fix": "eslint ./src/**/*.js --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "compileSass": "node-sass -o src/public/css src/sass/main.scss",
-    "start": "nodemon ./src/app.js --config nodemon.json"
+    "dev": "nodemon ./src/app.js --config nodemon.json",
+    "start": "node ./src/app.js"
   },
   "author": "Kupenko-Alexandr",
   "license": "ISC",
