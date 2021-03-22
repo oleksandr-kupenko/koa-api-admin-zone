@@ -1,6 +1,8 @@
 .header {
+  position: relative;
   width: 100%;
-  padding: 20px 137px 0 141px;
+  padding: 1.25rem 8.563rem 0 8.813rem;
+  z-index: 2;
   @media (max-width: 996px) {
     padding: 20px;
   }
@@ -10,7 +12,6 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  z-index: 2;
 }
 
 .logo {
