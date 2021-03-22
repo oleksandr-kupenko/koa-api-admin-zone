@@ -4,7 +4,7 @@ dotenv.config();
 const conrollerCreator = (page) => {
   const controller = async (ctx) => {
     await ctx.render(page, {
-      name: process.env.STELLA,
+      mapKey: process.env.mapKey,
     });
   };
   return controller;

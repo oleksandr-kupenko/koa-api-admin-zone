@@ -2,7 +2,7 @@
   .thegrid__cell:nth-child(7n + 1) {
     border-left: $border;
     padding-left: 1.875rem;
-    @media (max-width:415px) {
+    @media (max-width: 415px) {
       padding: 0.55rem 0.575rem 0.5rem;
     }
   }
@@ -335,7 +335,6 @@
   justify-content: flex-end;
   width: 100%;
   @media (max-width: 768px) {
-    
   }
 }
 
@@ -379,7 +378,7 @@
     }
   }
 
-  .thegrid__first{
+  .thegrid__first {
     padding-left: 1.875rem;
   }
 
@@ -418,7 +417,6 @@
     border-top: 1px solid #eef2f7;
   }
   @include tabCol(1px solid #dae4f2, 4px);
-
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(6, auto) 6%;
