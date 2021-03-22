@@ -2,6 +2,9 @@
   .thegrid__cell:nth-child(7n + 1) {
     border-left: $border;
     padding-left: 1.875rem;
+    @media (max-width:415px) {
+      padding: 0.55rem 0.575rem 0.5rem;
+    }
   }
   .thegrid__cell:nth-child(7n + 7) {
     border-right: $border;
@@ -326,10 +329,6 @@
   }
 }
 
-.wrap-table-admin {
-  
-}
-
 .search-table {
   padding-bottom: 0.688rem;
   display: flex;
@@ -378,6 +377,10 @@
         font-size: 1.2rem;
       }
     }
+  }
+
+  .thegrid__first{
+    padding-left: 1.875rem;
   }
 
   .thegrid__cell {
