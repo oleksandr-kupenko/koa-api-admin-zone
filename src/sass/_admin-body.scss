@@ -121,6 +121,12 @@
   }
 }
 
+.main-sm {
+  @media (max-width: 768px) {
+    padding: 5%;
+  }
+}
+
 .card-title {
   display: flex;
   margin: 28px 0 50px;

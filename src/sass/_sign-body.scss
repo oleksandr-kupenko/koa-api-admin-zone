@@ -1,8 +1,8 @@
 .circle {
   position: absolute;
-  width: 907px;
-  height: 907px;
-  padding: 78px;
+  width: 56.688rem;
+  height: 56.688rem;
+  padding: 4.875rem;
   background-color: rgba(254, 254, 254, 0.45);
   box-shadow: 0px 0px 42px rgba(231, 231, 231, 0.13);
   border-radius: 50%;
@@ -10,7 +10,7 @@
   margin-right: auto;
   left: 0;
   right: 0;
-  margin-top: -78px - 36px;
+  margin-top: -7.125rem;
   z-index: 1;
 }
 
@@ -26,8 +26,8 @@
   position: relative;
 }
 
-@each $num, $col, $bs, $pd in (3, rgba(251, 248, 248, 0.45), rgba(231, 231, 231, 0.36), 70px),
-  (2, rgba(254, 254, 254, 0.54), rgba(231, 231, 231, 0.11), 75px),
+@each $num, $col, $bs, $pd in (3, rgba(251, 248, 248, 0.45), rgba(231, 231, 231, 0.36), 4.375rem),
+  (2, rgba(254, 254, 254, 0.54), rgba(231, 231, 231, 0.11), 4.688rem),
   (1, rgba(255, 255, 255, 0.54), rgba(231, 231, 231, 0.43), 0)
 {
   .circle__#{$num} {
@@ -38,13 +38,13 @@
 .circle__img {
   width: 150px;
   margin: 0 auto;
-  padding-top: 57px;
+  padding-top: 3.125rem;
 }
 
 .circle__text {
   position: absolute;
   text-align: center;
-  bottom: 247px;
+  bottom: 15.438rem;
   font-family: 'Exo 2';
   font-style: normal;
   z-index: 2;
@@ -53,38 +53,52 @@
 .circle__title {
   margin-bottom: 10px;
   font-weight: 600;
-  font-size: 50px;
-  line-height: 60px;
+  font-size: 3.125rem;
+  line-height: 3.75rem;
   text-align: center;
   letter-spacing: 0.4px;
   color: #2a74db;
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 }
 
 .circle__descr {
   font-style: normal;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 1.5rem;
+  line-height: 1.813rem;
   text-align: center;
   letter-spacing: 0.4px;
   color: #000000;
 }
 
+.main-sm {
+  //padding-top: 8%;
+}
+
 .sm-form {
   margin: auto;
+  max-width: 39.5rem;
   margin-top: 8%;
-  width: 632px;
-  padding: 72px 116px 80px;
+  padding: 4.5rem 7.25rem 5rem;
+  @media (max-width: 768px) {
+    max-width: auto;
+    padding: 4.5rem 12% 5rem;
+  }
+  @media (max-width: 420px) {
+    margin-top: 20%;
+  }
 }
 
 .sm-form__title {
   width: 100%;
   font-family: 'Exo 2';
-  font-size: 28px;
+  font-size: 1.75rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 34px;
+  line-height: 2.125rem;
   text-align: left;
-  padding-bottom: 42px;
+  padding-bottom: 2.625rem;
   color: #002396;
 }
 
@@ -101,11 +115,11 @@
 
 .sm-form__pass-help {
   width: 100%;
-  padding: 14px 0 15px;
+  padding: 0.875rem 0 0.938rem;
   text-align: right;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 400;
-  line-height: 14px;
+  line-height: 0.875rem;
   a {
     color: #222428;
     text-decoration: none;
@@ -117,10 +131,10 @@
 }
 
 .confirm {
-  padding: 37px 0 23px;
+  padding: 2.313rem 0 1.438rem;
   li {
     list-style-type: none;
-    padding-bottom: 23px;
+    padding-bottom: 1.438rem;
   }
   li:last-child {
     padding-bottom: 0;
@@ -134,17 +148,17 @@
 .confirm__lable {
   display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  padding-left: 2.188rem;
+  margin-bottom: 0.75rem;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 1.375rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 300;
-  line-height: 16px;
+  line-height: 1rem;
   letter-spacing: 0.28px;
   a {
     font-weight: 500;
@@ -163,8 +177,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
+    height: 1.563rem;
+    width: 1.563rem;
     border: 2px solid #f2f2f2;
     border-radius: 2px;
   }
@@ -181,10 +195,10 @@
     display: block;
   }
   .checkmark:after {
-    left: 7px;
-    top: 1px;
-    width: 5px;
-    height: 12px;
+    left: 0.438rem;
+    top: 0.063rem;
+    width: 0.313rem;
+    height: 0.75rem;
     border: solid #0ad69c;
     border-width: 0px 3px 3px 0px;
     -webkit-transform: rotate(45deg);
@@ -194,7 +208,7 @@
 }
 
 .g-recaptcha {
-  margin-bottom: -25px;
+  margin-bottom: -1.563rem;
   transform: scale(0.692);
   transform-origin: 0;
   -webkit-transform: scale(0.692);
@@ -204,11 +218,11 @@
 }
 
 .pass-indicator {
-  height: 6px;
+  height: 0.375rem;
   display: flex;
   width: 100%;
   justify-content: inherit;
-  margin: 7px 0 22px;
+  margin: 0.438rem 0 22px;
   & span {
     flex-grow: 1;
     max-width: 32%;

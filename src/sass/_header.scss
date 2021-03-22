@@ -9,6 +9,7 @@
 .header-row {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -30,10 +31,11 @@
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 1rem;
+  line-height: 2.25rem;
   letter-spacing: 0.28px;
   color: #222428;
+  margin-left: auto;
   a {
     font-weight: 700;
     color: #062fb3;
