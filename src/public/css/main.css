@@ -1287,7 +1287,12 @@ body {
   margin-bottom: 0; }
 
 .input-base_sm {
-  width: 190px; }
+  flex-basis: 190px; }
+  .input-base_sm :first-child {
+    padding-right: 10px; }
+  @media (max-width: 500px) {
+    .input-base_sm {
+      flex-basis: auto; } }
 
 .btn {
   width: 188px;

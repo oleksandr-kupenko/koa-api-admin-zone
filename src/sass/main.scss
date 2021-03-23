@@ -85,7 +85,13 @@ body {
 }
 
 .input-base_sm {
-  width: 190px;
+  flex-basis: 190px;
+  :first-child {
+    padding-right: 10px;
+  }
+  @media (max-width: 500px) {
+    flex-basis: auto;
+  }
 }
 
 .btn {
