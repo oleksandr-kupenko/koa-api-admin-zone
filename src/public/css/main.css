@@ -109,7 +109,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #252f48;
     margin-right: 0.625em; }
   .breadcrumbs ::after {
-    content: url(../assets/img/separator.svg);
+    content: url(/img/separator.svg);
     margin-left: 0.9375em; }
   .breadcrumbs :last-child {
     pointer-events: none;
@@ -550,13 +550,11 @@ h1, h2, h3, h4, h5, h6 {
   transition: left 0.3s; }
 
 .grid-1col {
-  grid-template: 'head'
- 'main';
+  grid-template: 'head' 'main';
   grid-template-rows: 60px auto; }
 
 .grid-2col {
-  grid-template: 'side head'
- 'side main';
+  grid-template: 'side head' 'side main';
   grid-template-columns: 5rem 1fr;
   grid-template-rows: 8% auto; }
   @media (min-width: 1200px) {
