@@ -146,7 +146,7 @@ h1, h2, h3, h4, h5, h6 {
   .profile-detalis__summary::-webkit-details-marker {
     display: none; }
   .profile-detalis__summary::after {
-    content: url(../assets/img/summary.svg);
+    content: url(/img/summary.svg);
     margin-left: 0.375rem; }
   details[open] > .profile-detalis__summary::after {
     display: inline-block;
@@ -550,11 +550,13 @@ h1, h2, h3, h4, h5, h6 {
   transition: left 0.3s; }
 
 .grid-1col {
-  grid-template: 'head' 'main';
+  grid-template: 'head'
+ 'main';
   grid-template-rows: 60px auto; }
 
 .grid-2col {
-  grid-template: 'side head' 'side main';
+  grid-template: 'side head'
+ 'side main';
   grid-template-columns: 5rem 1fr;
   grid-template-rows: 8% auto; }
   @media (min-width: 1200px) {

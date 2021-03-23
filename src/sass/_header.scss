@@ -100,7 +100,7 @@
     display: none;
   }
   &::after {
-    content: url(../assets/img/summary.svg);
+    content: url(/img/summary.svg);
     margin-left: 0.375rem;
   }
   details[open] > &::after {
