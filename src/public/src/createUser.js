@@ -4,10 +4,9 @@ if (
 ) {
   document.querySelector('.btn.btn_todown').onclick = (evt) => {
     evt.preventDefault();
-    let data = Array.from(document.querySelectorAll('.sm-form.form input')).reduce(
-      (acc, input) => ({ ...acc, [input.name]: input.value }),
-      {}
-    );
+    let inputs = Array.from(document.querySelectorAll('.sm-form.form input'));
+
+    let inputsData = inputs.reduce((acc, input) => ({ ...acc, [input.name]: input.value }), {});
     let statusId = document.querySelector('.select-base').options[
       document.querySelector('.select-base').options.selectedIndex
     ].value;
@@ -18,9 +17,9 @@ if (
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        fname: data.fname,
-        lname: data.lname,
-        email: data.email,
+        fname: inputsData.fname,
+        lname: inputsData.lname,
+        email: inputsData.email,
         isRequested: true,
         categoryId: statusId,
       }),
@@ -30,7 +29,12 @@ if (
       })
       .then((data) => {
         console.log(data);
-        data === 23505 && alert('Email must be unique');
+        data === 23505 ? alert('Email must be unique') : clearInput();
       });
+
+    function clearInput() {
+      inputs.forEach((input) => (input.value = ''));
+      console.log('user was send for add');
+    }
   };
 }
