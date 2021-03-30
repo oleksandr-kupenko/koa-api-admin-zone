@@ -800,6 +800,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
     line-height: 1rem; }
     .thegrid .thegrid__cell select {
+      max-width: 6rem;
       font-family: Roboto;
       color: #222428;
       font-size: 0.875rem;
