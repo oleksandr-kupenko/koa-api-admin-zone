@@ -5,7 +5,6 @@ START TRANSACTION;
         name varchar(255) DEFAULT 'Junior'
     );
 
-
     INSERT INTO categories (name) VALUES  ('Junior')
     INSERT INTO categories (name) VALUES  ('Middle')
     INSERT INTO categories (name) VALUES  ('Senior')

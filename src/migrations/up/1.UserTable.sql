@@ -7,7 +7,6 @@ START TRANSACTION;
         email varchar(255) UNIQUE NOT NULL,
         country varchar(255) DEFAULT 'Ukraine',
         "isRequested" boolean NOT NULL
-
     );
 
 COMMIT;

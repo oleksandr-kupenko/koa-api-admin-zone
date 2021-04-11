@@ -1,20 +1,12 @@
 const Koa = require('koa');
 const path = require('path');
 const Router = require('koa-router');
-const views = require('koa-views');
-const serve = require('koa-static');
-const nunjucks = require('nunjucks');
 const bodyParser = require('koa-bodyparser');
-const Redis = require('ioredis');
-const globalRouter = require('./router');
-const dotenv = require('dotenv');
-dotenv.config();
+const usersRouter = require('./users/users.router');
+const passport = require('./libs/passport/koaPassport');
 
+passport.initialize();
 const app = new Koa();
-
-const redis = new Redis(process.env.REDISS_PASS);
-
-app.context.redis = redis;
 
 app.use(bodyParser());
 
@@ -25,36 +17,19 @@ app.use(async (ctx, next) => {
     if (err.isJoi) {
       ctx.throw(400, err.details[0].message);
     }
-    if (err.code == 23505) {
-      ctx.throw(200, err.code);
+    if (err.isPassport) {
+      ctx.throw(401, err.message);
     }
-    console.log(err);
-    ctx.throw(400, err);
+    console.log('this error =>', err.message);
+    ctx.throw(400, err.message);
   }
 });
-
-const nunjucksEnvironment = new nunjucks.Environment(
-  new nunjucks.FileSystemLoader(path.join(__dirname, './templates'))
-);
 
 const router = new Router();
 
 const port = process.env.PORT || 3000;
 
-const render = views(path.join(__dirname, './templates/views/'), {
-  extension: 'html',
-  options: {
-    nunjucksEnv: nunjucksEnvironment,
-  },
-  map: {
-    html: 'nunjucks',
-  },
-});
-
-app.use(render);
-app.use(serve(path.join(__dirname, '/public')));
-
-router.use('/', globalRouter.router.routes());
+router.use('/', usersRouter.router.routes());
 
 app.use(router.routes());
 

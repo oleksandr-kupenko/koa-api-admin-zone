@@ -6,9 +6,10 @@ class Database {
   constructor() {
     this.config = {
       database: process.env.DB_NAME,
-      user: process.env.DB_NAME,
+      user: process.env.DB_USER,
       password: process.env.DB_PASS,
-      host: '34.116.221.173',
+      host: 'localhost',
+      port: 5432,
     };
     this.poll = new Pool(this.config);
   }
