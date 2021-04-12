@@ -1,0 +1,3 @@
+START TRANSACTION;
+  ALTER TABLE "categories" DROP CONSTRAINT category_name;
+COMMIT;

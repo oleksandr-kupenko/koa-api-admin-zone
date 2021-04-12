@@ -29,8 +29,8 @@ class UserDB {
       '${body.lname}', '${body.isRequested}', '${body.categoryId}', '${body.email}', '${body.password}') RETURNING *`
       )
       .catch((err) => {
-        if (err.constraint === 'user_email') {
-          throw new Error('User with the same email already exists');
+        if (err.constraint === 'users_email_key') {
+          throw new Error(`User with ${body.email} email already exists`);
         }
         throw new Error(err.message);
       });
