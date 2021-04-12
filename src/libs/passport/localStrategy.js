@@ -29,9 +29,9 @@ module.exports = new LocalStrategy(opts, async (req, email, password, done) => {
       };
 
       user.tokens = {
-        accessToken: jwt.encode(accessToken, 'super_secret'),
+        accessToken: jwt.encode(accessToken, process.env.SEKRET_KEY),
         accessTokenExpirationDate: accessToken.expiresIn,
-        refreshToken: jwt.encode(refreshToken, 'super_secret_refresh'),
+        refreshToken: jwt.encode(refreshToken, process.env.SEKRET_KEY_REFRESH),
         refreshTokenExpirationDate: refreshToken.expiresIn,
       };
 

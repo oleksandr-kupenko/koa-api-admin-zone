@@ -26,7 +26,7 @@ const controllers = {
   async createUser(ctx) {
     const { body } = ctx.request;
     await validatorUsers.usersSchema.validateAsync(body);
-    body.password = crypto.pbkdf2Sync(body.password, 'salt', 100000, 64, 'sha256').toString('hex');
+    body.password = crypto.pbkdf2Sync(body.password, process.env.SEKRET_KEY, 100000, 64, 'sha256').toString('hex');
     const newUser = await UserDB.saveUser(body);
     ctx.status = 201;
     ctx.body = newUser.getAuthInfo();
@@ -61,7 +61,7 @@ const controllers = {
 
   async refreshToken(ctx) {
     const token = ctx.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.decode(token, 'super_secret_refresh');
+    const decodedToken = jwt.decode(token, process.env.SEKRET_KEY_REFRESH);
 
     if (decodedToken.expiresIn <= new Date().getTime()) {
       const error = new Error('Refresh token expired, please sign in into your account.');
@@ -82,9 +82,9 @@ const controllers = {
     };
 
     ctx.body = {
-      accessToken: jwt.encode(accessToken, 'super_secret'),
+      accessToken: jwt.encode(accessToken, process.env.SEKRET_KEY),
       accessTokenExpirationDate: accessToken.expiresIn,
-      refreshToken: jwt.encode(refreshToken, 'super_secret_refresh'),
+      refreshToken: jwt.encode(refreshToken, process.env.SEKRET_KEY_REFRESH),
       refreshTokenExpirationDate: refreshToken.expiresIn,
     };
   },
