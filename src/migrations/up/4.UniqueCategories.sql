@@ -1,0 +1,3 @@
+START TRANSACTION;
+  ALTER TABLE "categories" ADD CONSTRAINT category_name UNIQUE (name);
+COMMIT;
