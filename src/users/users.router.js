@@ -8,7 +8,7 @@ const router = new Router();
 
 router.get('/:userId', UsersController.getUser);
 router.get('/', UsersController.getUsersList);
-router.post('/', UsersValidator.signUp, UsersController.createUser);
+router.post('/sign-up', UsersValidator.signUp, UsersController.createUser);
 router.delete('/', UsersController.deleteUser);
 router.post('/sign-in', UsersValidator.signIn, UsersController.signIn);
 router.get('/profile', passport.authenticate('jwt', { session: false }), UsersController.profile);
