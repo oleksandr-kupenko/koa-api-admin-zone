@@ -1,4 +1,5 @@
 const db = require('../../db/db');
+const Category = require('./Category');
 
 class CategoryDB {
   static async getCategoryById(id) {
@@ -8,13 +9,12 @@ class CategoryDB {
       throw new Error(`Category with id: ${id}, does not exist`);
     }
 
-    const category = categoryResponse.rows[0];
-    return category;
+    return new Category(categoryResponse.rows[0]);
   }
 
   static async getCategories() {
     const categoriesResponse = await db.query('SELECT * FROM "categories"');
-    const categories = categoriesResponse.rows;
+    const categories = categoriesResponse.rows.map((category) => new Category(category));
     return categories;
   }
 
@@ -28,8 +28,7 @@ class CategoryDB {
         throw new Error(err.message);
       });
 
-    const newCategory = saveCategoryResponse.rows[0];
-    return newCategory;
+    return new Category(saveCategoryResponse.rows[0]);
   }
 
   static async deleteCategory(id) {
@@ -40,40 +39,6 @@ class CategoryDB {
     }
 
     return 'deleted';
-  }
-
-  static async getUsersFromCategoryById(id) {
-    const categoryResponse = await db.query(
-      `SELECT u.fname, u.lname, u.email, u.country, u."isRequested", c.name, u.id
-      FROM "users" u
-      JOIN categories c
-      ON c."id" = ${id}
-      GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id`
-    );
-
-    if (!categoryResponse.rowCount) {
-      throw new Error(`Category with id: ${id}, does not exist`);
-    }
-
-    const users = categoryResponse.rows;
-    return users;
-  }
-
-  static async getUsersFromCategoryByName(name) {
-    const categoryResponse = await db.query(
-      `SELECT u.fname, u.lname, u.email, u.country, u."isRequested", c.name, u.id
-      FROM "users" u
-      JOIN categories c
-      ON c.name LIKE '${name}'
-      GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id`
-    );
-
-    if (!categoryResponse.rowCount) {
-      throw new Error(`Category with id: ${name}, does not exist`);
-    }
-
-    const users = categoryResponse.rows;
-    return users;
   }
 }
 

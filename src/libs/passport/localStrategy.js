@@ -27,7 +27,7 @@ module.exports = new LocalStrategy(opts, async (req, email, password, done) => {
         expiresIn: new Date().setTime(new Date().getTime() + 1000000),
       };
 
-      const responseData = user.getAuthInfo();
+      const responseData = user.getInfo();
       console.log(user);
       responseData.tokens = {
         accessToken: jwt.encode(accessToken, process.env.SEKRET_KEY),

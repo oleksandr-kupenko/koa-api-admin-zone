@@ -5,20 +5,18 @@ const jwt = require('jwt-simple');
 
 const { UserDB } = require('./models/UserDB');
 const User = require('./models/User');
-const validatorUsers = require('./users.validator');
 
 dotenv.config();
 
-const controllers = {
+const UsersController = {
   async getUser(ctx) {
     const userId = ctx.request.params.userId;
     const user = await UserDB.getUserById(userId);
-    console.log(user);
-    ctx.body = user;
+    ctx.body = user.getInfo();
   },
 
   async getUsersList(ctx) {
-    const users = (await UserDB.getAllUsers()).map((user) => user.getAuthInfo());
+    const users = (await UserDB.getAllUsers()).map((user) => user.getInfo());
     console.log(...users);
     ctx.body = {
       ...users,
@@ -27,11 +25,10 @@ const controllers = {
 
   async createUser(ctx) {
     const { body } = ctx.request;
-    await validatorUsers.usersSchema.validateAsync(body);
     body.password = crypto.pbkdf2Sync(body.password, process.env.SEKRET_KEY, 100000, 64, 'sha256').toString('hex');
-    const newUser = await UserDB.saveUser(body);
+    const newUser = await UserDB.createUser(body);
     ctx.status = 201;
-    ctx.body = await newUser.getAuthInfo();
+    ctx.body = await newUser.getInfo();
   },
 
   async deleteUser(ctx) {
@@ -43,7 +40,7 @@ const controllers = {
   async signIn(ctx, next) {
     await passport.authenticate('local', (err, user) => {
       if (user) {
-        ctx.body = new User(user).getAuthInfo();
+        ctx.body = new User(user).getInfo();
       } else {
         ctx.status = 400;
         if (err) {
@@ -87,6 +84,20 @@ const controllers = {
       refreshTokenExpirationDate: refreshToken.expiresIn,
     };
   },
+
+  async getUsersFromCategoryById(ctx) {
+    const { body } = ctx.request;
+    const usersFromCategory = await UserDB.getUsersFromCategoryById(body.categoryId);
+    ctx.status = 201;
+    ctx.body = usersFromCategory.map((user) => user.getInfo());
+  },
+
+  async getUsersFromCategoryByName(ctx) {
+    const { body } = ctx.request;
+    const usersFromCategory = await UserDB.getUsersFromCategoryByName(body.categoryName);
+    ctx.status = 201;
+    ctx.body = usersFromCategory.map((user) => user.getInfo());
+  },
 };
 
-module.exports = { controllers };
+module.exports = { UsersController };

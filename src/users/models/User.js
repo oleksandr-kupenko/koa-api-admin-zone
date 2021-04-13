@@ -12,7 +12,7 @@ class User {
     this._tokens = user.tokens;
   }
 
-  getAuthInfo(idflag = false) {
+  getInfo(idflag = false) {
     const responseData = {
       email: this._email,
       fname: this._fname,

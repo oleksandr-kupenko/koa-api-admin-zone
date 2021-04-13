@@ -1,18 +1,19 @@
-const Router = require('koa-router');
+const Router = require('koa-joi-router');
 const passport = require('koa-passport');
 
-const { controllers } = require('./users.controller');
+const { UsersController } = require('./users.controller');
+const UsersValidator = require('./users.validator');
 
 const router = new Router();
 
-router.get('users/:userId', controllers.getUser);
-router.get('users', controllers.getUsersList);
-router.post('users', controllers.createUser);
-router.delete('users', controllers.deleteUser);
-router.post('sign-in', controllers.signIn);
-router.get('profile', passport.authenticate('jwt', { session: false }), controllers.profile);
-router.get('refresh/token', controllers.refreshToken);
+router.get('/:userId', UsersController.getUser);
+router.get('/', UsersController.getUsersList);
+router.post('/', UsersValidator.signUp, UsersController.createUser);
+router.delete('/', UsersController.deleteUser);
+router.post('/sign-in', UsersValidator.signIn, UsersController.signIn);
+router.get('/profile', passport.authenticate('jwt', { session: false }), UsersController.profile);
+router.get('/refresh/token', UsersController.refreshToken);
+router.post('/category-id', UsersValidator.getUsersFromCategoryById, UsersController.getUsersFromCategoryById);
+router.post('/category-name', UsersValidator.getUsersFromCategoryByName, UsersController.getUsersFromCategoryByName);
 
-module.exports = {
-  router,
-};
+module.exports = router;

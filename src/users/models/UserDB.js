@@ -24,11 +24,11 @@ class UserDB {
     return users;
   }
 
-  static async saveUser(body) {
-    const saveUserResponse = await db
+  static async createUser(body) {
+    const createUserResponse = await db
       .query(
-        `INSERT INTO "users" (fname, lname, "isRequested", "categoryId", email, password) VALUES ('${body.fname}', 
-      '${body.lname}', '${body.isRequested}', '${body.categoryId}', '${body.email}', '${body.password}',) RETURNING *`
+        `INSERT INTO "users" (fname, lname, "isRequested", "categoryId", country, email, password) VALUES ('${body.fname}', 
+      '${body.lname}', '${body.isRequested}', '${body.categoryId}', '${body.country}', '${body.email}', '${body.password}') RETURNING *`
       )
       .catch((err) => {
         if (err.constraint === 'users_email_key') {
@@ -38,8 +38,7 @@ class UserDB {
         }
         throw new Error(err.message);
       });
-
-    return new User(saveUserResponse.rows[0]);
+    return new User(createUserResponse.rows[0]);
   }
 
   static async deleteUser(id) {
@@ -76,6 +75,40 @@ class UserDB {
     }
 
     return { user: new User(user), flag: true };
+  }
+
+  static async getUsersFromCategoryById(id) {
+    const categoryResponse = await db.query(
+      `SELECT u.fname, u.lname, u.email, u.country, u."isRequested", c.name, u.id
+      FROM "users" u
+      JOIN categories c
+      ON c."id" = ${id}
+      GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id`
+    );
+
+    if (!categoryResponse.rowCount) {
+      throw new Error(`Category with id: ${id}, does not exist`);
+    }
+
+    const users = categoryResponse.rows.map((user) => new User(user));
+    return users;
+  }
+
+  static async getUsersFromCategoryByName(name) {
+    const categoryResponse = await db.query(
+      `SELECT u.fname, u.lname, u.email, u.country, u."isRequested", c.name, u.id
+      FROM "users" u
+      JOIN categories c
+      ON c.name LIKE '${name}'
+      GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id`
+    );
+
+    if (!categoryResponse.rowCount) {
+      throw new Error(`Category with id: ${name}, does not exist`);
+    }
+
+    const users = categoryResponse.rows.map((user) => new User(user));
+    return users;
   }
 }
 

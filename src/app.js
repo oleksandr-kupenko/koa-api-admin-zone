@@ -14,13 +14,14 @@ app.use(bodyParser());
 
 app.use(errorCatcher);
 
-const router = new Router();
-
 const port = process.env.PORT || 3000;
 
-router.use('/', usersRouter.router.routes(), categoriesRouter.router.routes());
+const router = new Router();
 
-app.use(router.routes());
+router.use('/users', usersRouter);
+router.use('/categories', categoriesRouter);
+
+app.use(router.middleware());
 
 app.listen(port, () => {
   console.log(`I was born :-) ${port}`);

@@ -1,16 +1,13 @@
-const Router = require('koa-router');
+const Router = require('koa-joi-router');
 
 const { controllers } = require('./categories.controller');
+const categoriesValidator = require('./categories.validator');
 
 const router = new Router();
 
-router.get('categories/:categoryId', controllers.getCategory);
-router.get('categories', controllers.getCategoriesList);
-router.post('categories', controllers.createCategory);
-router.post('users-from-category/id', controllers.getUsersFromCategoryById);
-router.post('users-from-category/name', controllers.getUsersFromCategoryByName);
-router.delete('categories', controllers.deleteCategory);
+router.get('/:categoryId', controllers.getCategory);
+router.get('/', controllers.getCategoriesList);
+router.post('/', categoriesValidator.createCategory, controllers.createCategory);
+router.delete('/', controllers.deleteCategory);
 
-module.exports = {
-  router,
-};
+module.exports = router;
