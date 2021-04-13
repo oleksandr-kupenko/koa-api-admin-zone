@@ -11,17 +11,34 @@ class User {
     this.#password = user.password;
     this._tokens = user.tokens;
   }
-  getAuthInfo() {
-    return {
-      id: this._id,
+
+  getAuthInfo(idflag = false) {
+    const responseData = {
       email: this._email,
       fname: this._fname,
-      lastname: this._lastname,
+      lname: this._lname,
       country: this._country,
       isRequested: this._isRequested,
       categoryId: this._categoryId,
-      tokens: this._tokens,
     };
+
+    if (idflag) {
+      responseData.id = this._id;
+    }
+
+    if (this._tokens) {
+      responseData.tokens = this._tokens;
+    }
+
+    return responseData;
+  }
+
+  getId() {
+    return this._id;
+  }
+
+  getEmail() {
+    return this._email;
   }
 }
 

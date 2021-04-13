@@ -13,7 +13,7 @@ class CategoryDB {
   }
 
   static async getCategories() {
-    const categoriesResponse = await db.query(`SELECT * FROM "categories"`);
+    const categoriesResponse = await db.query('SELECT * FROM "categories"');
     const categories = categoriesResponse.rows;
     return categories;
   }

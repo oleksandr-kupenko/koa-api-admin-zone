@@ -1,11 +1,11 @@
-const db = require('../db/db');
-const validatorUsers = require('./users.validator');
 const dotenv = require('dotenv');
 const passport = require('koa-passport');
 const crypto = require('crypto');
 const jwt = require('jwt-simple');
+
 const { UserDB } = require('./models/UserDB');
 const User = require('./models/User');
+const validatorUsers = require('./users.validator');
 
 dotenv.config();
 
@@ -13,13 +13,15 @@ const controllers = {
   async getUser(ctx) {
     const userId = ctx.request.params.userId;
     const user = await UserDB.getUserById(userId);
-    ctx.body = user.getAuthInfo();
+    console.log(user);
+    ctx.body = user;
   },
 
   async getUsersList(ctx) {
-    const users = await UserDB.getUsers();
+    const users = (await UserDB.getAllUsers()).map((user) => user.getAuthInfo());
+    console.log(...users);
     ctx.body = {
-      users,
+      ...users,
     };
   },
 
@@ -29,14 +31,12 @@ const controllers = {
     body.password = crypto.pbkdf2Sync(body.password, process.env.SEKRET_KEY, 100000, 64, 'sha256').toString('hex');
     const newUser = await UserDB.saveUser(body);
     ctx.status = 201;
-    ctx.body = newUser.getAuthInfo();
+    ctx.body = await newUser.getAuthInfo();
   },
 
   async deleteUser(ctx) {
     const { body } = ctx.request;
-    console.log(body.userId);
-    const deletedUser = await UserDB.deleteUser(body.userId);
-    console.log(deletedUser);
+    await UserDB.deleteUser(body.userId);
     ctx.status = 204;
   },
 
@@ -54,9 +54,8 @@ const controllers = {
   },
 
   async profile(ctx) {
-    ctx.body = {
-      user: ctx.state.user,
-    };
+    console.log(ctx.state);
+    ctx.body = ctx.state.user;
   },
 
   async refreshToken(ctx) {
@@ -72,12 +71,12 @@ const controllers = {
     const user = await UserDB.getUserByEmail(decodedToken.email);
 
     const accessToken = {
-      id: user.id,
+      id: user.getId(),
       expiresIn: new Date().setTime(new Date().getTime() + 200000),
     };
 
     const refreshToken = {
-      email: user.email,
+      email: user.getEmail(),
       expiresIn: new Date().setTime(new Date().getTime() + 1000000),
     };
 

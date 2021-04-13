@@ -1,7 +1,9 @@
 const Router = require('koa-router');
-const { controllers } = require('./users.controller');
-const router = new Router();
 const passport = require('koa-passport');
+
+const { controllers } = require('./users.controller');
+
+const router = new Router();
 
 router.get('users/:userId', controllers.getUser);
 router.get('users', controllers.getUsersList);

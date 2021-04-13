@@ -1,5 +1,7 @@
 const Router = require('koa-router');
+
 const { controllers } = require('./categories.controller');
+
 const router = new Router();
 
 router.get('categories/:categoryId', controllers.getCategory);

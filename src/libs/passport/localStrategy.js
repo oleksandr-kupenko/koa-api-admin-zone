@@ -18,24 +18,26 @@ module.exports = new LocalStrategy(opts, async (req, email, password, done) => {
       }
 
       const { user } = checkPasswordResponse;
-
       const accessToken = {
-        id: user.id,
+        id: user.getId(),
         expiresIn: new Date().setTime(new Date().getTime() + 200000),
       };
       const refreshToken = {
-        email: user.email,
+        email: user.getEmail(),
         expiresIn: new Date().setTime(new Date().getTime() + 1000000),
       };
 
-      user.tokens = {
+      const responseData = user.getAuthInfo();
+      console.log(user);
+      responseData.tokens = {
         accessToken: jwt.encode(accessToken, process.env.SEKRET_KEY),
         accessTokenExpirationDate: accessToken.expiresIn,
         refreshToken: jwt.encode(refreshToken, process.env.SEKRET_KEY_REFRESH),
         refreshTokenExpirationDate: refreshToken.expiresIn,
       };
-
-      return done(null, checkPasswordResponse.user);
+      return done(null, responseData);
     })
-    .catch((err) => done({ message: err.message }, false));
+    .catch((err) => {
+      done({ message: err.message }, false);
+    });
 });

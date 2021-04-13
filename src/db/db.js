@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 class Database {
@@ -13,14 +14,16 @@ class Database {
     };
     this.poll = new Pool(this.config);
   }
+
   query(sql) {
     return this.poll.query(sql);
   }
+
   close() {
-    this.poll.end;
+    return this.poll.end;
   }
 }
 
-const pool = new Pool({});
+// const pool = new Pool({});
 
 module.exports = new Database();

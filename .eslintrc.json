@@ -1,13 +1,17 @@
 {
   "env": {
-    "es2020": true,
+    "es2021": true,
     "browser": true
   },
   "extends": ["eslint:recommended", "airbnb-base"],
-  "quotes": [2, "single"],
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "rules": {"linebreak-style": 0}
+  "rules": {
+    "linebreak-style": 0,
+    "no-console": "off",
+    "prefer-destructuring": "off",
+    "comma-dangle": "off"
+  }
 }

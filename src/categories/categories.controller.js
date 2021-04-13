@@ -1,4 +1,3 @@
-const db = require('../db/db');
 const validatorCategories = require('./categories.validator');
 const { CategoryDB } = require('./models/CategoryDB');
 
@@ -26,8 +25,7 @@ const controllers = {
 
   async deleteCategory(ctx) {
     const { body } = ctx.request;
-    const deletedCategory = await CategoryDB.deleteCategory(body.categoryId);
-    console.log(deletedCategory);
+    await CategoryDB.deleteCategory(body.categoryId);
     ctx.status = 204;
   },
 
@@ -40,7 +38,6 @@ const controllers = {
 
   async getUsersFromCategoryByName(ctx) {
     const { body } = ctx.request;
-    console.log(body);
     const usersFromCategory = await CategoryDB.getUsersFromCategoryByName(body.categoryName);
     ctx.status = 201;
     ctx.body = usersFromCategory;
