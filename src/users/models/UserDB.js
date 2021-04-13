@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+
 const db = require('../../db/db');
 const User = require('./User');
 
