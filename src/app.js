@@ -1,6 +1,7 @@
 const Koa = require('koa');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
+const cors = require('@koa/cors');
 
 const usersRouter = require('./users/users.router');
 const categoriesRouter = require('./categories/categories.router');
@@ -11,7 +12,7 @@ passport.initialize();
 const app = new Koa();
 
 app.use(bodyParser());
-
+app.use(cors());
 app.use(errorCatcher);
 
 const port = process.env.PORT || 3000;

@@ -5,6 +5,7 @@ const jwt = require('jwt-simple');
 
 const { UserDB } = require('./models/UserDB');
 const User = require('./models/User');
+const AWSS3 = require('../utils/uploadS3');
 
 dotenv.config();
 
@@ -17,7 +18,6 @@ const UsersController = {
 
   async getUsersList(ctx) {
     const users = (await UserDB.getAllUsers()).map((user) => user.getInfo());
-    console.log(...users);
     ctx.body = {
       ...users,
     };
@@ -51,7 +51,6 @@ const UsersController = {
   },
 
   async profile(ctx) {
-    console.log(ctx.state);
     ctx.body = ctx.state.user;
   },
 
@@ -97,6 +96,14 @@ const UsersController = {
     const usersFromCategory = await UserDB.getUsersFromCategoryByName(body.categoryName);
     ctx.status = 201;
     ctx.body = usersFromCategory.map((user) => user.getInfo());
+  },
+
+  async updatePhoto(ctx) {
+    const photoUrl = await AWSS3.uploadS3(ctx.request.body.photo, 'users', `photos_${ctx.state.user.email}`);
+
+    await UserDB.updateUserPhoto(photoUrl, ctx.state.user.email);
+    console.log(photoUrl, ctx.state.user.email);
+    ctx.body = { photoUrl };
   },
 };
 

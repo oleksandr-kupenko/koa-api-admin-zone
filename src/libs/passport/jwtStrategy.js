@@ -18,7 +18,6 @@ module.exports = new JwtStrategy(opts, (jwtPayload, done) => {
 
   UserDB.getUserById(jwtPayload.id)
     .then((user) => {
-      console.log(user);
       done(null, user.getInfo());
     })
     .catch((err) => done({ isPassport: true, message: err.message }, false));

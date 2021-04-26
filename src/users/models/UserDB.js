@@ -28,8 +28,8 @@ class UserDB {
   static async createUser(body) {
     const createUserResponse = await db
       .query(
-        `INSERT INTO "users" (fname, lname, "isRequested", "categoryId", country, email, password) VALUES ('${body.fname}', 
-      '${body.lname}', '${body.isRequested}', '${body.categoryId}', '${body.country}', '${body.email}', '${body.password}') RETURNING *`
+        `INSERT INTO "users" (fname, lname, username, "isRequested", "categoryId", country, email, password) VALUES ('${body.fname}', 
+      '${body.lname}', username, '${body.isRequested}', '${body.categoryId}', '${body.country}', '${body.email}', '${body.password}') RETURNING *`
       )
       .catch((err) => {
         if (err.constraint === 'users_email_key') {
@@ -110,6 +110,13 @@ class UserDB {
 
     const users = categoryResponse.rows.map((user) => new User(user));
     return users;
+  }
+
+  static async updateUserPhoto(photoUrl, email) {
+    const user = await db.query(`
+    UPDATE "users" SET photo = '${photoUrl}' WHERE email = '${email}'
+    `);
+    return user;
   }
 }
 

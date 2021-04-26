@@ -15,5 +15,6 @@ router.get('/profile', passport.authenticate('jwt', { session: false }), UsersCo
 router.get('/refresh/token', UsersController.refreshToken);
 router.post('/category-id', UsersValidator.getUsersFromCategoryById, UsersController.getUsersFromCategoryById);
 router.post('/category-name', UsersValidator.getUsersFromCategoryByName, UsersController.getUsersFromCategoryByName);
+router.put('/photo', passport.authenticate('jwt', { session: false }), UsersController.updatePhoto);
 
 module.exports = router;

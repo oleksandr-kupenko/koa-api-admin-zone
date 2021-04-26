@@ -28,7 +28,6 @@ module.exports = new LocalStrategy(opts, async (req, email, password, done) => {
       };
 
       const responseData = user.getInfo();
-      console.log(user);
       responseData.tokens = {
         accessToken: jwt.encode(accessToken, process.env.SEKRET_KEY),
         accessTokenExpirationDate: accessToken.expiresIn,
