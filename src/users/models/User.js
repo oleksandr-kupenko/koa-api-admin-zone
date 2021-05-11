@@ -4,13 +4,19 @@ class User {
     this._id = user.id;
     this._fname = user.fname;
     this._lname = user.lname;
-    this.username = user.username;
+    this._username = user.username;
     this._email = user.email;
     this._country = user.country;
     this._isRequested = user.isRequested;
     this._categoryId = user.categoryId;
+    this._categoryName = user.name;
     this._photo = user.photo;
+    this._phone = user.phone;
+    this._gender = user.gender;
     this.#password = user.password;
+    this._rate = user.rate;
+    this._rating = user.rating;
+    this._stack = user.stack;
     this._tokens = user.tokens;
   }
 
@@ -23,7 +29,13 @@ class User {
       country: this._country,
       isRequested: this._isRequested,
       categoryId: this._categoryId,
+      categoryName: this._categoryName,
       photo: this._photo,
+      phone: this._phone,
+      gender: this._gender,
+      rate: this._rate,
+      rating: this._rating,
+      stack: this._stack,
     };
 
     if (idflag) {

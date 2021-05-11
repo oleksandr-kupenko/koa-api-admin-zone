@@ -8,10 +8,11 @@ dotenv.config();
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
-  secretOrKey: process.env.SEKRET_KEY,
+  secretOrKey: process.env.SECRET_KEY,
 };
 
 module.exports = new JwtStrategy(opts, (jwtPayload, done) => {
+  console.log('jwt:', jwtPayload);
   if (jwtPayload.expiresIn <= new Date().getTime()) {
     done({ isPassport: true, message: 'Expired access token.' }, false);
   }

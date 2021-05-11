@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Login to Docker Registry
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Building docker image
+      - docker build -t $APP_NAME:$IMAGE_TAG --build-arg PORT --build-arg MESSAGE -f Dockerfile .
+      - docker tag $APP_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:$IMAGE_TAG
+      - echo Build completed on `date`
+      - echo Docker image built and tagged
+  post_build:
+    commands:
+      - echo Starting post_build stage
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:$IMAGE_TAG
+      - aws ecs update-service --cluster $FARGATE_CLUSTER --service $SERVICE_NAME --force-new-deployment

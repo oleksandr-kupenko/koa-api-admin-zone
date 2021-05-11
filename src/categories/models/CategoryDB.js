@@ -14,7 +14,7 @@ class CategoryDB {
 
   static async getCategories() {
     const categoriesResponse = await db.query('SELECT * FROM "categories"');
-    const categories = categoriesResponse.rows.map((category) => new Category(category));
+    const categories = categoriesResponse.rows.map((category) => new Category(category).getInfo());
     return categories;
   }
 

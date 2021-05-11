@@ -13,6 +13,7 @@
     "no-console": "off",
     "prefer-destructuring": "off",
     "comma-dangle": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "max-len": ["error", { "code": 120 }]
   }
 }

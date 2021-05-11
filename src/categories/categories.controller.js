@@ -9,9 +9,7 @@ const controllers = {
 
   async getCategoriesList(ctx) {
     const categories = await CategoryDB.getCategories();
-    ctx.body = {
-      categories,
-    };
+    ctx.body = categories;
   },
 
   async createCategory(ctx) {

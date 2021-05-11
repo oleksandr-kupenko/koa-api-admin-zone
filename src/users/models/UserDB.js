@@ -5,31 +5,52 @@ const User = require('./User');
 
 class UserDB {
   static async getUserById(id) {
-    console.log('get user by id');
-    const userResponse = await db.query(`SELECT * FROM "users" WHERE id = ${id}`);
+    const userResponse = await db.query(`SELECT u.fname, u.lname, u.username, u.email, u.country, u."isRequested", 
+    u.gender, u.phone, u."categoryId", u.photo, c.name, u.stack, u.rate, u.rating
+    FROM "users" u
+    JOIN categories c
+    ON u.id =  ${id}
+    WHERE u."categoryId" = c.id
+    GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id, u.stack, u.rating`);
     if (!userResponse.rowCount) {
       throw new Error(`User with id: ${id}, does not exist`);
     }
-
+    console.log(userResponse.rows[0]);
     return new User(userResponse.rows[0]);
   }
 
-  static async getAllUsers() {
-    const usersResponse = await db.query(`SELECT u.fname, u.lname, u.email, u.country, u."isRequested", c.name, u.id
+  static async getAllUsers(min = 0, max = 'ALL', search = '', country = '', category = '', stack = '', sort) {
+    console.log('search', search);
+    const usersResponse = await db.query(`SELECT u.fname, u.lname, u.email, u.country, u."isRequested", 
+      c.name, u.id, u.rate, u.rating, u.photo, u.phone, u.gender, u.stack
         FROM "users" u
         JOIN categories c
         ON u."categoryId" = c.id
-        GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id`);
-    const users = usersResponse.rows.map((user) => new User(user));
+        WHERE u.country ILIKE '%${country}%' AND 
+        CONCAT (u.fname,' ',u.lname) ILIKE '%${search}%' ${stack ? `AND u.stack ILIKE '%${stack}%'` : ''} 
+        ${category ? ` AND u."categoryId" = ${category}` : ''} 
+          GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id, u."categoryId", u.rate
+          ORDER BY ${sort ? 'u.rate' : 'u.rating'} ASC
+        OFFSET ${min} LIMIT ${max}`);
 
+    const users = usersResponse.rows.map((user) => new User(user));
+    console.log('users', users[0]);
     return users;
+  }
+
+  static async getCountUsers() {
+    const countResponse = await db.query('SELECT COUNT(*) FROM users');
+    const count = countResponse.rows[0];
+
+    return count;
   }
 
   static async createUser(body) {
     const createUserResponse = await db
       .query(
-        `INSERT INTO "users" (fname, lname, username, "isRequested", "categoryId", country, email, password) VALUES ('${body.fname}', 
-      '${body.lname}', username, '${body.isRequested}', '${body.categoryId}', '${body.country}', '${body.email}', '${body.password}') RETURNING *`
+        `INSERT INTO "users" (fname, lname, username, email, password) 
+        VALUES ('${body.fname}', '${body.lname}', '${body.username}', 
+        '${body.email}', '${body.password}') RETURNING *`
       )
       .catch((err) => {
         if (err.constraint === 'users_email_key') {
@@ -37,9 +58,59 @@ class UserDB {
           error.status = 400;
           throw error;
         }
+        if (err.constraint === 'user_username') {
+          const error = new Error(`User with ${body.username} username already exists`);
+          error.status = 400;
+          throw error;
+        }
         throw new Error(err.message);
       });
     return new User(createUserResponse.rows[0]);
+  }
+
+  static async updateUser(body) {
+    console.log('username', body.username);
+
+    const updateUserResponse = await db
+      .query(
+        `UPDATE users
+        SET fname = '${body.fname}',
+            lname = '${body.lname}',
+            username = '${body.username ? body.username : ''}',
+            gender = '${body.gender}',
+            "categoryId" = '${body.categoryId}',
+            country = '${body.country}',
+            email = '${body.email}',
+            phone = '${body.phone}',
+            stack = '${body.stack}',
+            rate = '${body.rate}'
+        WHERE email = '${body.email}' 
+        RETURNING *`
+      )
+      .catch((err) => {
+        if (err.constraint === 'users_email_key') {
+          const error = new Error(`User with ${body.email} email already exists`);
+          error.status = 400;
+          throw error;
+        }
+        if (err.constraint === 'user_username') {
+          const error = new Error(`User with ${body.username} username already exists`);
+          error.status = 400;
+          throw error;
+        }
+        throw new Error(err.message);
+      });
+    return new User(updateUserResponse.rows[0]);
+  }
+
+  static async resetPassword(body) {
+    const resetPasswordResponse = await db.query(
+      `UPDATE users
+      SET password = '${body.password}'   
+      WHERE id = '${body.id}' 
+      RETURNING *`
+    );
+    return new User(resetPasswordResponse.rows[0]);
   }
 
   static async deleteUser(id) {
@@ -55,7 +126,7 @@ class UserDB {
     const userResponse = await db.query(`SELECT * FROM "users" WHERE email = '${email}'`);
 
     if (!userResponse.rowCount) {
-      throw new Error(`User with email: ${email}, does not exist`);
+      throw new Error(`User with email ${email} does not exist`);
     }
 
     return new User(userResponse.rows[0]);
@@ -65,8 +136,8 @@ class UserDB {
     console.log('check password');
     const userResponse = await db.query(`SELECT * FROM "users" WHERE email = '${email}'`);
 
-    if (!userResponse.rowCount) {
-      return { message: `User with email: ${email}, does not exist`, flag: false };
+    if (!userResponse.rowCount || userResponse.rowCount === 0) {
+      return { message: `User with email ${email} does not exist`, flag: false };
     }
 
     const user = { ...userResponse.rows[0] };

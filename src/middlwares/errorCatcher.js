@@ -8,7 +8,7 @@ const errorCatcher = async (ctx, next) => {
     if (err.isPassport) {
       ctx.throw(401, err.message);
     }
-    console.log('this error =>', err.message);
+    console.log(err.message);
     ctx.throw(400, err.message);
   }
 };
