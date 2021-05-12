@@ -5,13 +5,13 @@ const User = require('./User');
 
 class UserDB {
   static async getUserById(id) {
-    const userResponse = await db.query(`SELECT u.fname, u.lname, u.username, u.email, u.country, u."isRequested", 
+    const userResponse = await db.query(`SELECT u.fname, u.lname, u.username, u.email, u.country, u."isAdmin", 
     u.gender, u.phone, u."categoryId", u.photo, c.name, u.stack, u.rate, u.rating
     FROM "users" u
     JOIN categories c
     ON u.id =  ${id}
     WHERE u."categoryId" = c.id
-    GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id, u.stack, u.rating`);
+    GROUP BY u.fname, u.lname, u.country, u."isAdmin", c.name, u.email, u.id, u.stack, u.rating`);
     if (!userResponse.rowCount) {
       throw new Error(`User with id: ${id}, does not exist`);
     }
@@ -21,7 +21,7 @@ class UserDB {
 
   static async getAllUsers(min = 0, max = 'ALL', search = '', country = '', category = '', stack = '', sort) {
     console.log('search', search);
-    const usersResponse = await db.query(`SELECT u.fname, u.lname, u.email, u.country, u."isRequested", 
+    const usersResponse = await db.query(`SELECT u.fname, u.lname, u.email, u.country, u."isAdmin", 
       c.name, u.id, u.rate, u.rating, u.photo, u.phone, u.gender, u.stack
         FROM "users" u
         JOIN categories c
@@ -29,7 +29,7 @@ class UserDB {
         WHERE u.country ILIKE '%${country}%' AND 
         CONCAT (u.fname,' ',u.lname) ILIKE '%${search}%' ${stack ? `AND u.stack ILIKE '%${stack}%'` : ''} 
         ${category ? ` AND u."categoryId" = ${category}` : ''} 
-          GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id, u."categoryId", u.rate
+          GROUP BY u.fname, u.lname, u.country, u."isAdmin", c.name, u.email, u.id, u."categoryId", u.rate
           ORDER BY ${sort ? 'u.rate' : 'u.rating'} ASC
         OFFSET ${min} LIMIT ${max}`);
 
@@ -38,8 +38,10 @@ class UserDB {
     return users;
   }
 
-  static async getCountUsers() {
-    const countResponse = await db.query('SELECT COUNT(*) FROM users');
+  static async getCountUsers(search) {
+    const countResponse = await db.query(`SELECT COUNT(*) FROM users WHERE 
+    CONCAT (fname,' ',lname) ILIKE '%${search}%'
+    `);
     const count = countResponse.rows[0];
 
     return count;
@@ -151,11 +153,11 @@ class UserDB {
 
   static async getUsersFromCategoryById(id) {
     const categoryResponse = await db.query(
-      `SELECT u.fname, u.lname, u.email, u.country, u."isRequested", c.name, u.id
+      `SELECT u.fname, u.lname, u.email, u.country, u."isAdmin", c.name, u.id
       FROM "users" u
       JOIN categories c
       ON c."id" = ${id}
-      GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id`
+      GROUP BY u.fname, u.lname, u.country, u."isAdmin", c.name, u.email, u.id`
     );
 
     if (!categoryResponse.rowCount) {
@@ -168,11 +170,11 @@ class UserDB {
 
   static async getUsersFromCategoryByName(name) {
     const categoryResponse = await db.query(
-      `SELECT u.fname, u.lname, u.email, u.country, u."isRequested", c.name, u.id
+      `SELECT u.fname, u.lname, u.email, u.country, u."isAdmin", c.name, u.id
       FROM "users" u
       JOIN categories c
       ON c.name LIKE '${name}'
-      GROUP BY u.fname, u.lname, u.country, u."isRequested", c.name, u.email, u.id`
+      GROUP BY u.fname, u.lname, u.country, u."isAdmin", c.name, u.email, u.id`
     );
 
     if (!categoryResponse.rowCount) {

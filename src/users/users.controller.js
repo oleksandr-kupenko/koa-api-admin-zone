@@ -19,7 +19,6 @@ const UsersController = {
 
   async getUsersList(ctx) {
     const { body } = ctx.request;
-    console.log(body);
     const idflag = true;
     const users = (
       await UserDB.getAllUsers(body.min, body.max, body.search, body.country, body.category, body.stack, body.sort)
@@ -28,13 +27,12 @@ const UsersController = {
   },
 
   async getCountUsers(ctx) {
-    const count = await UserDB.getCountUsers();
+    const count = await UserDB.getCountUsers(ctx.query.search);
     ctx.body = count;
   },
 
   async createUser(ctx) {
     const { body } = ctx.request;
-    console.log(body);
     body.password = crypto.pbkdf2Sync(body.password, process.env.SECRET_KEY, 100000, 64, 'sha256').toString('hex');
     const newUser = await UserDB.createUser(body);
     ctx.status = 201;

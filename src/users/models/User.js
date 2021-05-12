@@ -7,7 +7,7 @@ class User {
     this._username = user.username;
     this._email = user.email;
     this._country = user.country;
-    this._isRequested = user.isRequested;
+    this._isAdmin = user.isAdmin;
     this._categoryId = user.categoryId;
     this._categoryName = user.name;
     this._photo = user.photo;
@@ -27,7 +27,7 @@ class User {
       lname: this._lname,
       username: this._username,
       country: this._country,
-      isRequested: this._isRequested,
+      isAdmin: this._isAdmin,
       categoryId: this._categoryId,
       categoryName: this._categoryName,
       photo: this._photo,

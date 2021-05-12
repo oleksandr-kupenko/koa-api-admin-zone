@@ -8,7 +8,7 @@ const userOutSchema = {
   fname: Joi.string().min(3).max(255).required(),
   lname: Joi.string().min(3).max(255).required(),
   categoryId: Joi.number().required(),
-  isRequested: Joi.bool().required(),
+  isAdmin: Joi.bool(),
   username: Joi.string().min(3).max(255).required(),
   categoryName: Joi.string(),
   country: Joi.string(),

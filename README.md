@@ -11,7 +11,7 @@
     "fname": "User1",
     "lname": "Userov1",
     "email": "ddsa@mail.ru44",
-    "isRequested": true,
+    "isAdmin": true,
     "categoryId": 2,
     "password": "4444"
 }
