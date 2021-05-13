@@ -13,7 +13,6 @@ const UsersController = {
   async getUser(ctx) {
     const userId = ctx.request.params.userId;
     const user = await UserDB.getUserById(userId);
-    console.log('getinfo', user.getInfo());
     ctx.body = user.getInfo();
   },
 
@@ -126,6 +125,21 @@ const UsersController = {
   async updateProfile(ctx) {
     const { body } = ctx.request;
     const updatedUser = await UserDB.updateUser(body);
+    ctx.status = 201;
+    ctx.body = await updatedUser.getInfo();
+  },
+
+  async updateRating(ctx) {
+    const { body } = ctx.request;
+    console.log(body);
+    const updatedUser = await UserDB.updateUserRating(body);
+    ctx.status = 201;
+    ctx.body = await updatedUser.getInfo();
+  },
+
+  async updateStatusAdmin(ctx) {
+    const { body } = ctx.request;
+    const updatedUser = await UserDB.updateUserStatusAdmin(body);
     ctx.status = 201;
     ctx.body = await updatedUser.getInfo();
   },

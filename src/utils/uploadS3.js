@@ -15,7 +15,7 @@ class AWSS3 {
 
     const timestamp = +new Date();
     const filename = `${folder}/${subfolder ? `${subfolder}/` : ''}${timestamp}.${ext}`;
-    console.log('filename', filename);
+
     // чистим объекьты при загрузке нового фото, чтобы не засорять
     if (subfolder) {
       const params = {

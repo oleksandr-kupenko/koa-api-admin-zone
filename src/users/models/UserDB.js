@@ -15,12 +15,11 @@ class UserDB {
     if (!userResponse.rowCount) {
       throw new Error(`User with id: ${id}, does not exist`);
     }
-    console.log(userResponse.rows[0]);
+
     return new User(userResponse.rows[0]);
   }
 
   static async getAllUsers(min = 0, max = 'ALL', search = '', country = '', category = '', stack = '', sort) {
-    console.log('search', search);
     const usersResponse = await db.query(`SELECT u.fname, u.lname, u.email, u.country, u."isAdmin", 
       c.name, u.id, u.rate, u.rating, u.photo, u.phone, u.gender, u.stack
         FROM "users" u
@@ -34,7 +33,7 @@ class UserDB {
         OFFSET ${min} LIMIT ${max}`);
 
     const users = usersResponse.rows.map((user) => new User(user));
-    console.log('users', users[0]);
+
     return users;
   }
 
@@ -71,8 +70,6 @@ class UserDB {
   }
 
   static async updateUser(body) {
-    console.log('username', body.username);
-
     const updateUserResponse = await db
       .query(
         `UPDATE users
@@ -113,6 +110,26 @@ class UserDB {
       RETURNING *`
     );
     return new User(resetPasswordResponse.rows[0]);
+  }
+
+  static async updateUserRating(body) {
+    const updateUserRatingResponse = await db.query(
+      `UPDATE users
+      SET rating = '${body.rating}'   
+      WHERE id = '${body.id}' 
+      RETURNING *`
+    );
+    return new User(updateUserRatingResponse.rows[0]);
+  }
+
+  static async updateUserStatusAdmin(body) {
+    const updateUserStatusAdminResponse = await db.query(
+      `UPDATE users
+      SET "isAdmin" = '${body.status}'   
+      WHERE id = '${body.id}' 
+      RETURNING *`
+    );
+    return new User(updateUserStatusAdminResponse.rows[0]);
   }
 
   static async deleteUser(id) {
