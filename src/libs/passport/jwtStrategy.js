@@ -1,14 +1,14 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const { ExtractJwt } = require('passport-jwt');
 const dotenv = require('dotenv');
-
+dotenv.config();
 const { UserDB } = require('../../users/models/UserDB');
 
-dotenv.config();
+const secretKey = process.env.SECRET_KEY || 'salt';
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
-  secretOrKey: process.env.SECRET_KEY,
+  secretOrKey: secretKey,
 };
 
 module.exports = new JwtStrategy(opts, (jwtPayload, done) => {

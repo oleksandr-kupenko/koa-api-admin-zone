@@ -1,12 +1,14 @@
-FROM node:13
+FROM node:14
 
 WORKDIR /app
 
 COPY package*.json ./
 
+COPY . /app
+
 RUN npm install
 
-COPY . /app
+
 
 ARG PORT
 ARG DB_NAME
@@ -26,7 +28,6 @@ ENV DB_NAME=$DB_NAME
 ENV DB_USER=$DB_USER
 ENV DB_PASS=$DB_PASS
 ENV DB_HOST=$DB_HOST
-
 ENV SECRET_KEY=$SECRET_KEY
 ENV SECRET_KEY_REFRESH=$SECRET_KEY_REFRESH
 ENV accessKeyId=$accessKeyId
