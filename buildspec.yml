@@ -8,7 +8,7 @@ phases:
   build:
     commands:
       - echo Building docker image
-      - docker build -t $APP_NAME:$IMAGE_TAG --build-arg PORT --build-arg DB_NAME --build-arg DB_USER --build-arg DB_PASS --build-arg DB_HOST --build-arg SECRET_KEY --build-arg SECRET_KEY_REFRESH --build-arg accessKeyId --build-arg secretAccessKey --build-arg userPhotoFolder --build-arg bucketName -f Dockerfile .
+      - docker build -t $APP_NAME:$IMAGE_TAG --build-arg PORT --build-arg MESSAGE -f Dockerfile .
       - docker tag $APP_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:$IMAGE_TAG
       - echo Build completed on `date`
       - echo Docker image built and tagged
