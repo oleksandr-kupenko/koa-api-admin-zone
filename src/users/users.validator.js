@@ -32,8 +32,7 @@ exports.signIn = {
 
 exports.email = {
   validate: {
-    type: 'json',
-    body: {
+    query: {
       email: Joi.string().min(3).max(255).required(),
     },
   },
@@ -61,18 +60,20 @@ exports.signUp = {
 
 exports.getUsersFromCategoryById = {
   validate: {
-    type: 'json',
-    body: {
-      categoryId: Joi.number().required(),
+    request: {
+      params: {
+        catId: Joi.number().required(),
+      },
     },
   },
 };
 
 exports.getUsersFromCategoryByName = {
   validate: {
-    type: 'json',
-    body: {
-      categoryName: Joi.string().required(),
+    request: {
+      params: {
+        catName: Joi.string().required(),
+      },
     },
   },
 };

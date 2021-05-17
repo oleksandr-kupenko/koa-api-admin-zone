@@ -21,6 +21,10 @@ const router = new Router();
 
 router.use('/users', usersRouter);
 router.use('/categories', categoriesRouter);
+router.get('/', (ctx) => {
+  ctx.status = 200;
+  ctx.body = 'Hello World';
+});
 
 app.use(router.middleware());
 

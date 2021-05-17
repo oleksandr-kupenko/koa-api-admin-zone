@@ -19,7 +19,8 @@ class UserDB {
     return new User(userResponse.rows[0]);
   }
 
-  static async getAllUsers(min = 0, max = 'ALL', search = '', country = '', category = '', stack = '', sort) {
+  static async getAllUsers({ min, max, search, country, category, stack, sort }) {
+    console.log(max);
     const usersResponse = await db.query(`SELECT u.fname, u.lname, u.email, u.country, u."isAdmin", 
       c.name, u.id, u.rate, u.rating, u.photo, u.phone, u.gender, u.stack
         FROM "users" u

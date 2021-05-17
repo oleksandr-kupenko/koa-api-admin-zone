@@ -12,7 +12,6 @@ const opts = {
 };
 
 module.exports = new JwtStrategy(opts, (jwtPayload, done) => {
-  console.log('jwt:', jwtPayload);
   if (jwtPayload.expiresIn <= new Date().getTime()) {
     done({ isPassport: true, message: 'Expired access token.' }, false);
   }

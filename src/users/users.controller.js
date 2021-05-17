@@ -17,11 +17,8 @@ const UsersController = {
   },
 
   async getUsersList(ctx) {
-    const { body } = ctx.request;
     const idflag = true;
-    const users = (
-      await UserDB.getAllUsers(body.min, body.max, body.search, body.country, body.category, body.stack, body.sort)
-    ).map((user) => user.getInfo(idflag));
+    const users = (await UserDB.getAllUsers(ctx.query)).map((user) => user.getInfo(idflag));
     ctx.body = users;
   },
 
@@ -88,23 +85,28 @@ const UsersController = {
   },
 
   async getUserByEmail(ctx) {
-    const email = ctx.request.body.email;
+    console.log(ctx.query.email);
+    const email = ctx.query.email;
+
     const user = await UserDB.getUserByEmail(email);
     ctx.status = 201;
-    const id = user.getInfo((idflag = true)).id;
+    const idflag = true;
+    const id = user.getInfo(idflag).id;
     ctx.body = { id };
   },
 
   async getUsersFromCategoryById(ctx) {
-    const { body } = ctx.request;
-    const usersFromCategory = await UserDB.getUsersFromCategoryById(body.categoryId);
+    console.log(ctx.request.params);
+    const categoryId = ctx.request.params.catId;
+    const usersFromCategory = await UserDB.getUsersFromCategoryById(categoryId);
     ctx.status = 201;
     ctx.body = usersFromCategory.map((user) => user.getInfo());
   },
 
   async getUsersFromCategoryByName(ctx) {
-    const { body } = ctx.request;
-    const usersFromCategory = await UserDB.getUsersFromCategoryByName(body.categoryName);
+    console.log(ctx.request.params);
+    const categoryName = ctx.request.params.catName;
+    const usersFromCategory = await UserDB.getUsersFromCategoryByName(categoryName);
     ctx.status = 201;
     ctx.body = usersFromCategory.map((user) => user.getInfo());
   },
